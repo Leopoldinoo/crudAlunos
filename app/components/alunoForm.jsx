@@ -1,26 +1,17 @@
-'use client';
+"use client";
 
-import { createAlunoAction } from '@/modulos/alunos/controller/alunosActions';
-import { useRef } from 'react';
-import { toast } from 'sonner';
-
-import { useRouter } from 'next/navigation';
-import SubmitButton from './submitButton';
+import { createAlunoAction } from "@/modulos/alunos/controller/alunosActions";
+import { useRef } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import SubmitButton from "./submitButton";
 
 export default function AlunoForm() {
   const router = useRouter();
   const formRef = useRef(null);
 
   async function handleAction(formData) {
-    const res = await createAlunoAction(formData);
-
-    if (res.success) {
-      toast.success(res.message);
-      formRef.current?.reset();
-      router.refresh();
-    } else {
-      toast.error(res.error);
-    }
+    await createAlunoAction(formData);
   }
 
   return (
@@ -29,7 +20,6 @@ export default function AlunoForm() {
       action={handleAction}
       className="bg-white p-6 rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800"
     >
-      {/* Título */}
       <div className="md:col-span-2">
         <h2 className="text-xl font-semibold">Cadastro de Aluno</h2>
         <p className="text-sm text-gray-500">
@@ -37,7 +27,6 @@ export default function AlunoForm() {
         </p>
       </div>
 
-      {/* Nome */}
       <div className="flex flex-col gap-1">
         <label htmlFor="nome" className="text-sm font-medium">
           Nome completo
@@ -52,7 +41,6 @@ export default function AlunoForm() {
         />
       </div>
 
-      {/* Email */}
       <div className="flex flex-col gap-1">
         <label htmlFor="email" className="text-sm font-medium">
           Email
@@ -67,7 +55,6 @@ export default function AlunoForm() {
         />
       </div>
 
-      {/* Matrícula */}
       <div className="flex flex-col gap-1">
         <label htmlFor="matricula" className="text-sm font-medium">
           Matrícula
@@ -82,7 +69,6 @@ export default function AlunoForm() {
         />
       </div>
 
-      {/* Curso */}
       <div className="flex flex-col gap-1">
         <label htmlFor="curso" className="text-sm font-medium">
           Curso
@@ -97,7 +83,6 @@ export default function AlunoForm() {
         />
       </div>
 
-      {/* Nascimento */}
       <div className="flex gap-2 items-center justify-start w-full">
         <label htmlFor="nascimento" className="text-sm font-medium w-50">
           Data de nascimento:
@@ -111,7 +96,6 @@ export default function AlunoForm() {
         />
       </div>
 
-      {/* Botão */}
       <div className="md:col-span-2 flex justify-end">
         <SubmitButton />
       </div>

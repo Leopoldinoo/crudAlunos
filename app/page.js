@@ -12,19 +12,16 @@ export default async function AlunosPage() {
     <main className="max-w-5xl mx-auto p-6 space-y-10 w-full">
       <Toaster position="top-right" richColors />
 
-      {/* HEADER */}
       <header className="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md">
         <h1 className="text-3xl font-bold text-gray-800 w-full">
           CRUD de Alunos
         </h1>
       </header>
 
-      {/* FORM */}
       <section>
         <AlunoForm />
       </section>
 
-      {/* LISTAGEM */}
       <section className="bg-white p-6 rounded-2xl shadow-md text-gray-800">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">
