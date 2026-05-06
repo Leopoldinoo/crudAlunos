@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { deleteAlunoAction } from '@/modulos/alunos/controller/alunosActions';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+import { deletar_Aluno } from "@/modulos/alunos/controller/controllerAluno";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function DeleteButton({ id }) {
   const router = useRouter();
 
   async function handleDelete() {
-    const res = await deleteAlunoAction(id);
+    const res = await deletar_Aluno(id);
 
     if (res.success) {
       toast.success(res.message);

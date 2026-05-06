@@ -1,13 +1,14 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import { getAlunosAction } from '@/modulos/alunos/controller/alunosActions';
-import AlunoForm from './components/alunoForm';
-import DeleteButton from './components/btnDeletar';
-import { Toaster } from 'sonner';
+import { get_Alunos } from "@/modulos/alunos/controller/controllerAluno";
+import AlunoForm from "./components/alunoForm";
+import DeleteButton from "./components/btnDeletar";
+import { Toaster } from "sonner";
 
 export default async function AlunosPage() {
-  const alunos = await getAlunosAction();
-
+  const alunos = await get_Alunos();
+  console.log(alunos);
+  console.log("Renderizando a página de alunos...");
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-10 w-full">
       <Toaster position="top-right" richColors />
@@ -24,9 +25,7 @@ export default async function AlunosPage() {
 
       <section className="bg-white p-6 rounded-2xl shadow-md text-gray-800">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">
-            Alunos cadastrados
-          </h2>
+          <h2 className="text-xl font-semibold">Alunos cadastrados</h2>
 
           <span className="text-xl text-gray-100 font-bold bg-black px-2 py-1 rounded">
             Total: {alunos.length}

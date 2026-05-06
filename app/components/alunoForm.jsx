@@ -1,17 +1,25 @@
 "use client";
 
-import { createAlunoAction } from "@/modulos/alunos/controller/alunosActions";
+import { cadastrar_Aluno } from "@/modulos/alunos/controller/controllerAluno";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import SubmitButton from "./submitButton";
+import Btncadastrar from "./BtnCadastrar";
 
 export default function AlunoForm() {
   const router = useRouter();
   const formRef = useRef(null);
-
   async function handleAction(formData) {
-    await createAlunoAction(formData);
+    const res = await cadastrar_Aluno(formData);
+
+    if (res.success) {
+      toast.success(res.message);
+      formRef.current.reset();
+    } else {
+      toast.error(res.error);
+    }
+
+    router.refresh();
   }
 
   return (
@@ -97,7 +105,7 @@ export default function AlunoForm() {
       </div>
 
       <div className="md:col-span-2 flex justify-end">
-        <SubmitButton />
+        <Btncadastrar />
       </div>
     </form>
   );
