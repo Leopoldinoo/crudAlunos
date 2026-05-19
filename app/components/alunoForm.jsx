@@ -6,30 +6,40 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import Btncadastrar from "./BtnCadastrar";
 
-export default function AlunoForm() {
+export default function AlunoForm({ onClose }) {
   const router = useRouter();
   const formRef = useRef(null);
+
   async function handleAction(formData) {
-    const res = await cadastrar_Aluno(formData);
+    try {
+      const res = await cadastrar_Aluno(formData);
 
-    if (res.success) {
-      toast.success(res.message);
-      formRef.current.reset();
-    } else {
-      toast.error(res.error);
+      if (res.success) {
+        toast.success(res.message);
+
+        formRef.current?.reset();
+
+        // Fecha o modal
+        onClose?.();
+
+        // Atualiza a tabela
+        router.refresh();
+      } else {
+        toast.error(res.error);
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar aluno:", error);
+      toast.error("Erro ao cadastrar aluno");
     }
-
-    router.refresh();
   }
 
   return (
     <form
       ref={formRef}
       action={handleAction}
-      className="bg-white p-6 rounded-2xl shadow-md grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800"
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800"
     >
       <div className="md:col-span-2">
-        <h2 className="text-xl font-semibold">Cadastro de Aluno</h2>
         <p className="text-sm text-gray-500">
           Preencha os dados abaixo para cadastrar um novo aluno.
         </p>
@@ -39,6 +49,7 @@ export default function AlunoForm() {
         <label htmlFor="nome" className="text-sm font-medium">
           Nome completo
         </label>
+
         <input
           id="nome"
           name="nome"
@@ -53,6 +64,7 @@ export default function AlunoForm() {
         <label htmlFor="email" className="text-sm font-medium">
           Email
         </label>
+
         <input
           id="email"
           name="email"
@@ -67,6 +79,7 @@ export default function AlunoForm() {
         <label htmlFor="matricula" className="text-sm font-medium">
           Matrícula
         </label>
+
         <input
           id="matricula"
           name="matricula"
@@ -81,6 +94,7 @@ export default function AlunoForm() {
         <label htmlFor="curso" className="text-sm font-medium">
           Curso
         </label>
+
         <input
           id="curso"
           name="curso"
@@ -91,15 +105,16 @@ export default function AlunoForm() {
         />
       </div>
 
-      <div className="flex gap-2 items-center justify-start w-full">
-        <label htmlFor="nascimento" className="text-sm font-medium w-50">
-          Data de nascimento:
+      <div className="flex flex-col gap-1 md:col-span-2">
+        <label htmlFor="nascimento" className="text-sm font-medium">
+          Data de nascimento
         </label>
+
         <input
           id="nascimento"
           name="nascimento"
           type="date"
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-50"
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
       </div>

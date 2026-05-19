@@ -7,11 +7,10 @@ import { Toaster } from "sonner";
 import Modal from "./components/BaseModal";
 import FrmEditar from "./components/FrmEditar";
 import GraphicsDashboard from "./components/GraphicsDashboard";
+import RelatorioPDF from "./components/RelatorioPDF";
 
 export default async function AlunosPage() {
   const alunos = await get_Alunos();
-  console.log(alunos);
-  console.log("Renderizando a página de alunos...");
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-10 w-full">
       <Toaster position="top-right" richColors />
@@ -22,12 +21,16 @@ export default async function AlunosPage() {
         </h1>
       </header>
 
-      <section>
-        <AlunoForm />
+      <section className="flex flex-row justify-between gap-3">
+        <RelatorioPDF />
+
+        <Modal titulo="Cadastrar Aluno" textoBotao="Adicionar Aluno">
+          <AlunoForm />
+        </Modal>
       </section>
 
       <section>
-        <GraphicsDashboard />
+        <GraphicsDashboard alunos={alunos} />
       </section>
 
       <section className="bg-white p-6 rounded-2xl shadow-md text-gray-800">
@@ -67,7 +70,10 @@ export default async function AlunosPage() {
 
                     <td className="py-3">
                       <div className="flex justify-center gap-2">
-                        <Modal titulo="Editar Aluno" textoBotao="Editar" children={<FrmEditar aluno={aluno} />} />
+                        <Modal titulo="Editar Aluno" textoBotao="Editar">
+                          <FrmEditar aluno={aluno} />
+                        </Modal>
+
                         <DeleteButton id={aluno.id} />
                       </div>
                     </td>
