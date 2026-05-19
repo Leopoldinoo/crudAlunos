@@ -6,6 +6,7 @@ import DeleteButton from "./components/btnDeletar";
 import { Toaster } from "sonner";
 import Modal from "./components/BaseModal";
 import FrmEditar from "./components/FrmEditar";
+import GraphicsDashboard from "./components/GraphicsDashboard";
 
 export default async function AlunosPage() {
   const alunos = await get_Alunos();
@@ -23,6 +24,10 @@ export default async function AlunosPage() {
 
       <section>
         <AlunoForm />
+      </section>
+
+      <section>
+        <GraphicsDashboard />
       </section>
 
       <section className="bg-white p-6 rounded-2xl shadow-md text-gray-800">
@@ -62,7 +67,7 @@ export default async function AlunosPage() {
 
                     <td className="py-3">
                       <div className="flex justify-center gap-2">
-                        <Modal titulo="Editar Aluno" textoBotao="Editar" children={<FrmEditar id={aluno} />} />
+                        <Modal titulo="Editar Aluno" textoBotao="Editar" children={<FrmEditar aluno={aluno} />} />
                         <DeleteButton id={aluno.id} />
                       </div>
                     </td>
