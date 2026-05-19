@@ -4,6 +4,7 @@ import {
   apaga_Aluno,
   gravarAluno,
   pegar_AllAlunos,
+  updateAlunoService,
 } from "../services/servicesAluno";
 
 export async function get_Alunos() {
@@ -32,6 +33,18 @@ export async function deletar_Aluno(id) {
   try {
     await apaga_Aluno(id);
     return { success: true, message: "Aluno deletado com sucesso" };
+  } catch (err) {
+    return { success: false, error: err.message };
+  }
+}
+
+export async function updateAlunoAction(id, formData) {
+  const nome = formData.get("nome")?.toString().trim();
+  const curso = formData.get("curso")?.toString().trim();
+
+  try {
+    const alunoAtualizado = await updateAlunoService(id, { nome, curso });
+    return { success: true, message: "Aluno atualizado com sucesso", data: alunoAtualizado };
   } catch (err) {
     return { success: false, error: err.message };
   }

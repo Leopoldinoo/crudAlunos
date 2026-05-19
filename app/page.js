@@ -4,6 +4,8 @@ import { get_Alunos } from "@/modulos/alunos/controller/controllerAluno";
 import AlunoForm from "./components/alunoForm";
 import DeleteButton from "./components/btnDeletar";
 import { Toaster } from "sonner";
+import Modal from "./components/BaseModal";
+import FrmEditar from "./components/FrmEditar";
 
 export default async function AlunosPage() {
   const alunos = await get_Alunos();
@@ -60,6 +62,7 @@ export default async function AlunosPage() {
 
                     <td className="py-3">
                       <div className="flex justify-center gap-2">
+                        <Modal titulo="Editar Aluno" textoBotao="Editar" children={<FrmEditar id={aluno} />} />
                         <DeleteButton id={aluno.id} />
                       </div>
                     </td>

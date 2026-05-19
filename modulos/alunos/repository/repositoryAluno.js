@@ -28,3 +28,24 @@ export async function del_Aluno(id) {
   });
   return result;
 }
+
+
+export async function findAlunoById(id) {
+  const aluno = await prisma.aluno.findUnique({
+    where: { id },
+  });
+  return aluno;
+}
+
+export async function updateAluno(id, data) {
+  console.log("Atualizando aluno com ID:", id, 'com dados:', data);
+
+  const Aluno_atualizado = await prisma.aluno.update({
+    where: { id },
+    data,
+  });
+
+  console.log("Aluno atualizado:", Aluno_atualizado);
+  return Aluno_atualizado;
+
+}
