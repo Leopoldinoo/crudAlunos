@@ -11,7 +11,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import AlunosPage from "../page";
 // Passo 3: registrar as partes (ativar)
 ChartJS.register(
   CategoryScale,

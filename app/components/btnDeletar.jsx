@@ -1,14 +1,13 @@
 "use client";
 
-import { deletar_Aluno } from "@/modulos/alunos/controller/controllerAluno";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
+import { deletarRegistro } from "@/modulos/alunosActions/deletarRegistro";
 export default function DeleteButton({ id }) {
   const router = useRouter();
 
   async function handleDelete() {
-    const res = await deletar_Aluno(id);
+    const res = await deletarRegistro(id);
 
     if (res.success) {
       toast.success(res.message);

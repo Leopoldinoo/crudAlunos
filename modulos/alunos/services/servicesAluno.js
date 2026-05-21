@@ -13,13 +13,13 @@ export async function pegar_AllAlunos() {
   return result;
 }
 
-export async function gravarAluno(nome, email, matricula, curso, nascimento) {
-  console.log("Gravando aluno:", { nome, email, matricula, curso, nascimento });
-  if (!nome || !email || !matricula || !curso || !nascimento) {
+export async function gravarAluno(nome, email, matricula, curso, sexo, turno, dataMatricula) {
+  console.log("Gravando aluno:", { nome, email, matricula, curso, sexo, turno, dataMatricula });
+  if (!nome || !email || !matricula || !curso || !sexo || !turno) {
     throw new Error("Todos os campos são obrigatórios");
   }
 
-  return await post_Aluno({ nome, email, matricula, curso, nascimento });
+  return await post_Aluno({ nome, email, matricula, curso, sexo, turno, dataMatricula });
 }
 
 export async function apaga_Aluno(id) {

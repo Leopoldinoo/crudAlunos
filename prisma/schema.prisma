@@ -16,7 +16,9 @@ model Aluno {
   email     String   @unique
   matricula String   @unique
   curso     String
-  nascimento String
+  sexo      String
+  turno     String
+  dataMatricula      String
   ativo     Boolean  @default(true)
   criadoEm  DateTime @default(now())
 }

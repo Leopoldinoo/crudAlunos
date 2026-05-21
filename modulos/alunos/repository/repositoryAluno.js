@@ -9,14 +9,16 @@ export async function get_AllAlunos() {
 }
 
 export async function post_Aluno(data) {
-  const { nome, email, matricula, curso, nascimento } = data;
+  const { nome, email, matricula, curso, sexo, turno, dataMatricula } = data;
   const result = await prisma.aluno.create({
     data: {
       nome,
       email,
       matricula,
       curso,
-      nascimento,
+      sexo,
+      turno,
+      dataMatricula,
     },
   });
   return result;

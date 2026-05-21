@@ -17,11 +17,13 @@ export async function cadastrar_Aluno(formData) {
   const email = formData.get("email")?.toString().trim();
   const matricula = formData.get("matricula")?.toString().trim();
   const curso = formData.get("curso")?.toString().trim();
-  const nascimento = formData.get("nascimento")?.toString();
+  const sexo = formData.get("sexo")?.toString().trim();
+  const turno = formData.get("turno")?.toString().trim();
+  const dataMatricula = formData.get("dataMatricula")?.toString().trim();
   console.log(formData);
   console.log("controller");
   try {
-    await gravarAluno(nome, email, matricula, curso, nascimento);
+    await gravarAluno(nome, email, matricula, curso, sexo, turno, dataMatricula);
 
     return { success: true, message: "Aluno cadastrado com sucesso" };
   } catch (err) {
@@ -41,9 +43,11 @@ export async function deletar_Aluno(id) {
 export async function updateAlunoAction(id, formData) {
   const nome = formData.get("nome")?.toString().trim();
   const curso = formData.get("curso")?.toString().trim();
+  const sexo = formData.get("sexo")?.toString().trim();
+  const turno = formData.get("turno")?.toString().trim();
 
   try {
-    const alunoAtualizado = await updateAlunoService(id, { nome, curso });
+    const alunoAtualizado = await updateAlunoService(id, { nome, curso, sexo, turno });
     return { success: true, message: "Aluno atualizado com sucesso", data: alunoAtualizado };
   } catch (err) {
     return { success: false, error: err.message };

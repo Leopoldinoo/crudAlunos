@@ -1,19 +1,19 @@
 export const dynamic = "force-dynamic";
 
-import { get_Alunos } from "@/modulos/alunos/controller/controllerAluno";
 import AlunoForm from "./components/alunoForm";
 import DeleteButton from "./components/btnDeletar";
 import { Toaster } from "sonner";
 import Modal from "./components/BaseModal";
 import FrmEditar from "./components/FrmEditar";
-import GraphicsDashboard from "./components/GraphicsDashboard";
+import GraphicsDashboard from "./components/dashboard/GraphicsDashboard";
 import RelatorioPDF from "./components/RelatorioPDF";
+import { Get_All_Registros } from "@/modulos/alunosActions/pegarTodos";
 
 export default async function AlunosPage() {
-  const alunos = await get_Alunos();
+  const alunos = await Get_All_Registros();
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-10 w-full">
-      <Toaster position="top-right" richColors />
+      <Toaster position="top-right" />
 
       <header className="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md">
         <h1 className="text-3xl font-bold text-gray-800 w-full">
