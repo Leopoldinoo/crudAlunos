@@ -10,29 +10,15 @@ export default function AlunoForm({ onClose, onSaved }) {
   const formRef = useRef(null);
 
   async function handleAction(formData) {
-    try {
-      const res = await GravarRegistro(formData);
+    const res = await GravarRegistro(formData);
 
-      if (res.success) {
-        toast.success(res.message || "Aluno cadastrado com sucesso!", {
-          duration: 3000,
-          style: {
-            background: "#16a34a",
-            color: "#ffffff",
-            border: "1px solid #15803d",
-          },
-        });
-
-        formRef.current?.reset();
-
-        setTimeout(() => {
-          router.refresh();
-        }, 500);
-      }
-    } catch (error) {
-      console.error("Erro ao cadastrar aluno:", error);
-      toast.error("Erro ao cadastrar aluno");
+    if (res.success) {
+      toast.success(res.message);
+    } else {
+      toast.error(res.error);
     }
+
+    router.refresh();
   }
 
   return (
